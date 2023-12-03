@@ -23,7 +23,7 @@ class ProgramController extends Controller
             $latestrenstra = $skpd->renstras()->latest()->first()->id;
             return redirect()->route('renstra.show', ['renstra' => $latestrenstra]);
         } catch (\Throwable $th) {
-            return redirect()->route('renstra.index')->with('error', 'Tambahkan Minimal 1 Rencana Strategis');
+            return redirect()->route('renstra.index')->with('failed', 'Tambahkan Minimal 1 Rencana Strategis');
         }
 
         // $customcss = '';
@@ -126,7 +126,7 @@ class ProgramController extends Controller
             return redirect()->route('renstra.show', ['renstra' => $latestrenstra])->with('success', 'Program berhasil ditambahkan');
         } catch (\Exception $e) {
             // Tangani jika terjadi error saat menyimpan data
-            return redirect()->back()->with('error', 'Gagal menambahkan program: ' . $e->getMessage())->withInput();
+            return redirect()->back()->with('failed', 'Gagal menambahkan program: ' . $e->getMessage())->withInput();
         }
     }
 

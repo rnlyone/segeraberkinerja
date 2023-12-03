@@ -128,10 +128,10 @@ class SatuanController extends Controller
 
                 return redirect()->back()->with('success', 'Import data berhasil.');
             } else {
-                return redirect()->back()->with('error', 'File harus berformat Excel (xlsx/xls).');
+                return redirect()->back()->with('failed', 'File harus berformat Excel (xlsx/xls).');
             }
         } else {
-            return redirect()->back()->with('error', 'Pilih file untuk diupload.');
+            return redirect()->back()->with('failed', 'Pilih file untuk diupload.');
         }
     }
 

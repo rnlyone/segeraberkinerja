@@ -28,7 +28,7 @@ class UserController extends Controller
             Auth::login($user);
         return redirect()->route('dashboard')->with('sukses', "Login Sukses");
         } else {
-            return back()->with('error', 'Username / Password Salah!');
+            return back()->with('failed', 'Username / Password Salah!');
         }
     }
 

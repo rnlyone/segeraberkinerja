@@ -211,7 +211,7 @@ class ItemKegiatanController extends Controller
 
         } catch (\Throwable $th) {
             dd($th);
-            return redirect()->route('program.show', ['program' => $kegiatan->id_program])->with('error', 'Kegiatan Tidak Berhasil Ditambahkan');
+            return redirect()->route('program.show', ['program' => $kegiatan->id_program])->with('failed', 'Kegiatan Tidak Berhasil Ditambahkan');
         }
     }
 

@@ -15,7 +15,7 @@
     @endif
 
     <!-- Error -->
-    @if (session()->get('error'))
+    @if (session()->get('failed'))
     <div class="toast basic-toast position-fixed top-0 end-0 m-2" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
             <strong class="me-auto">Gagal</strong>
@@ -23,7 +23,7 @@
         </div>
         <div class="toast-body">
             <div class="alert alert-danger" role="alert">
-                <div class="alert-body"><strong>{{ session('error') }}</strong></div>
+                <div class="alert-body"><strong>{{ session('failed') }}</strong></div>
               </div>
         </div>
     </div>

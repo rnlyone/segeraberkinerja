@@ -149,7 +149,7 @@ class ItemKegiatanController extends Controller
 
         } catch (\Throwable $th) {
             dd($th);
-            return redirect()->back()->with('error', 'Kegiatan Tidak Berhasil Ditambahkan');
+            return redirect()->back()->with('failed', 'Kegiatan Tidak Berhasil Ditambahkan');
         }
     }
 
@@ -281,7 +281,7 @@ class ItemKegiatanController extends Controller
             return redirect()->route('kegiatan.show', ['kegiatan' => $kegiatan->id])->with('success', 'Sub Kegiatan Berhasil di Edit');
 
         } catch (\Throwable $th) {
-            return redirect()->back()->with('error', 'Sub Kegiatan Tidak Berhasil di Edit');
+            return redirect()->back()->with('failed', 'Sub Kegiatan Tidak Berhasil di Edit');
         }
     }
 

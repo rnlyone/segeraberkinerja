@@ -89,7 +89,7 @@ class KegiatanController extends Controller
             return redirect()->route('program.show', ['program' => $request->id_program])->with('success', 'Program berhasil ditambahkan');
         } catch (\Exception $e) {
             // Tangani jika terjadi error saat menyimpan data
-            return redirect()->back()->with('error', 'Gagal menambahkan program: ' . $e->getMessage())->withInput();
+            return redirect()->back()->with('failed', 'Gagal menambahkan program: ' . $e->getMessage())->withInput();
         }
     }
 

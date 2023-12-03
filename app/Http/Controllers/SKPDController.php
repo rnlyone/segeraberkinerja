@@ -163,7 +163,7 @@ class SKPDController extends Controller
             ]);
         } catch (\Throwable $th) {
             // dd($th);
-            return redirect()->route('skpd.index')->with('error', 'SKPD tidak memiliki Minimal 1 Rencana Strategis');
+            return redirect()->route('skpd.index')->with('failed', 'SKPD tidak memiliki Minimal 1 Rencana Strategis');
         }
     }
 
