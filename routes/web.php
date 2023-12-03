@@ -62,6 +62,6 @@ Route::get('/', function () {
     if (Auth::guest()) {
         return redirect()->route('flogin');
     } else {
-
+        return redirect()->route('dashboard');
     }
 });
