@@ -67,7 +67,7 @@
                                     // Ambil dua elemen pertama setelah pemecahan string berdasarkan titik
                                     $result = implode('.', array_slice($kode_parts, 0, 2));
                                 @endphp
-                                <input type="text" id="kode-opd" class="form-control" value="{{auth()->user()->skpd->$result}}." placeholder="Kode Program" disabled>
+                                <input type="text" id="kode-opd" class="form-control" value="{{$result}}." placeholder="Kode Program" disabled>
                               </div>
                               <div class="col-sm-7">
                                 <input type="text" id="kode-id" class="form-control" name="kode" placeholder="Kode Program">
