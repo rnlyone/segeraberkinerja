@@ -281,7 +281,7 @@ class ItemKegiatanController extends Controller
             return redirect()->route('kegiatan.show', ['kegiatan' => $kegiatan->id])->with('success', 'Sub Kegiatan Berhasil di Edit');
 
         } catch (\Throwable $th) {
-            dd($th);
+            return redirect()->back()->with('error', 'Sub Kegiatan Tidak Berhasil di Edit');
         }
     }
 
