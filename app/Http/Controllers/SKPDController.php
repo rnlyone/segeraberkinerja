@@ -137,15 +137,30 @@ class SKPDController extends Controller
                     return Str::of($data->output)->limit(150, '...');
                 })
                 ->editColumn('pagu_anggaran', function($data){
-                    if ($data->pagu_anggaran > 0){
-                        return "Rp. ". number_format($data->pagu_anggaran, 0, ',', '.');
+                    $pagu_anggaran = 0;
+
+                    if(!empty($data->kegiatans)){
+                        foreach($data->kegiatans as $kegiatan){
+                            $pagu_anggaran += $kegiatan->pagu_anggaran;
+                        }
+                    }
+
+                    if ($pagu_anggaran > 0){
+                        return "Rp. ". number_format($pagu_anggaran, 0, ',', '.');
                     }else {
                         return '<span class="badge rounded-pill bg-warning">Belum ada</span>';
                     }
                 })
                 ->editColumn('pagu_indikatif', function($data){
-                    if ($data->pagu_indikatif > 0){
-                        return "Rp. ". number_format($data->pagu_indikatif, 0, ',', '.');
+                    $pagu_indikatif = 0;
+
+                    if(!empty($data->kegiatans)){
+                        foreach($data->kegiatans as $kegiatan){
+                            $pagu_indikatif += $kegiatan->pagu_indikatif;
+                        }
+                    }
+                    if ($pagu_indikatif > 0){
+                        return "Rp. ". number_format($pagu_indikatif, 0, ',', '.');
                     }else {
                         return '<span class="badge rounded-pill bg-warning">Rp. Belum Ada</span>';
                     }

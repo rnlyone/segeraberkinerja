@@ -187,7 +187,7 @@
                                                         </tr>
                                                         <tr>
                                                             <th colspan="2">
-                                                                <select class="select2 form-select" id="select-tipe" onchange="updateTipeSearch(this)" style="width: 150px;">
+                                                                <select class="select2-size-sm form-select" id="select-tipe" onchange="updateTipeSearch(this)" style="width: 150px;">
                                                                     <option value="">Pilih Tipe</option>
                                                                     @foreach ($kelompoks as $kelompok)
                                                                         <option value="{{$kelompok->id}}" data-id="{{$kelompok->id}}">{{$kelompok->uraian}}</option>
@@ -195,7 +195,7 @@
                                                                 </select>
                                                             </th>
                                                             <th colspan="2">
-                                                                <select class="select2 form-select" id="select-satuan" onchange="updateSearch(this)" style="width: 150px;">
+                                                                <select class="select2-size-sm form-select" id="select-satuan" onchange="updateSearch(this)" style="width: 150px;">
                                                                     <option value="">Pilih Komponen</option>
                                                                 </select>
                                                             </th>
@@ -300,7 +300,7 @@
                 satuans.forEach(function(satuan) {
                     let option = document.createElement('option');
                     option.value = satuan.id;
-                    option.text = `${satuan.nama_item}`;
+                    option.text = `${satuan.nama_item} `+`(${satuan.spesifikasi})`;
                     satuanSelect.appendChild(option);
                 });
             },
@@ -370,7 +370,7 @@
             const newRow = `<tr class="draggable-row">
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><textarea type="text" class="form-control form-control-sm" name="${counter}_sub_item_kegiatan" placeholder="Nama Sub" readonly>${komponen.kode_rekening}</textarea><input type="hidden" name="${counter}_id_item" value="${komponen.id}"></td>
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><textarea type="text" class="form-control form-control-sm" name="${counter}_tipe_item_kegiatan" placeholder="Nama Tipe" readonly>${komponen.kelompok.uraian}</textarea></td>
-                                <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><textarea type="text" class="form-control form-control-sm" name="${counter}_nama_item_kegiatan" placeholder="Nama Item" readonly>${komponen.nama_item}</textarea></td>
+                                <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><textarea type="text" class="form-control form-control-sm" name="${counter}_nama_item_kegiatan" placeholder="Nama Item" readonly>${komponen.nama_item} ${komponen.spesifikasi || ''}</textarea></td>
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><input type="text" class="form-control form-control-sm" name="${counter}_satuan_item_kegiatan" placeholder="Ex. Kg/Lbr" readonly value="${komponen.satuan}"></td>
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><input style="width: 100px;" type="number" id="harga-input-${counter}" class="harga-input form-control form-control-sm" name="${counter}_harga_item_kegiatan" placeholder="" value="${$('#harga-input').text()}" oninput="updateTotal(${counter}); updateGrandTotal();" readonly></td>
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><input style="width: 100px;" type="number" id="volume-input-${counter}" class="volume-input form-control form-control-sm" name="${counter}_volume_item_kegiatan" placeholder="" oninput="updateTotal(${counter}); updateGrandTotal();" value="${$('#volume-input').val()}"></td>

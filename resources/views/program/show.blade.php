@@ -281,13 +281,13 @@
                                     <tbody></tbody>
                                 </table>
                             </div>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
         </div>
