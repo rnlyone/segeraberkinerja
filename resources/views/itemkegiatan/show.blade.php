@@ -203,7 +203,7 @@
                                                             <th style="padding-right: 0.3rem; padding-left: 0.3rem;"><input type="number" id="volume-input" class="form-control" name="volume" oninput="updateTotalSearch();";
                                                                 placeholder="Contoh : Cm, M, Kg2" value="1"></th>
                                                             <th>Rp.<span id="total-search"></span></th>
-                                                            <th><a id="addRowBtn" class="btn-sm btn-icon btn-success waves-effect">+</a></th>
+                                                            <th><a id="addRowBtn" class="btn-sm btn-icon btn-success waves-effect"><i data-feather="plus"></a></th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
@@ -214,6 +214,10 @@
                                 <div class="col-sm-12 mt-2">
                                     <button id="kegiatan-submit"
                                         class="btn btn-primary me-1 waves-effect waves-float waves-light justify-content-end">Simpan</button>
+                                    <a href="{{route('print.item_kegiatan', ['item_kegiatan' => $item_kegiatan->id])}}" class="btn btn-outline-info me-1 waves-effect waves-float waves-light justify-content-end">
+                                        <i data-feather="printer"></i>
+                                        Print
+                                    </a>
                                 </div>
                             </div>
                         </form>

@@ -47,6 +47,9 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/program/{program}/getdata', [ProgramController::class, 'get_data'])->name('program.get.data');
 
 
+    Route::get('/print/item_kegiatan/{item_kegiatan}', [ItemKegiatanController::class, 'print'])->name('print.item_kegiatan');
+
+
 
     Route::get('/penganggaran_program/{program}/show/{tahun}', [SKPDController::class, 'get_table'])->name('penganggaran.program.get.tahun');
     Route::post('/kegiatan/{kegiatan}/updatepagu', [KegiatanController::class, 'update_pagu'])->name('kegiatan.update.pagu');

@@ -9,6 +9,8 @@ use App\Models\Komponen;
 use App\Models\Program;
 use App\Models\Renstra;
 use App\Models\Satuan;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -188,6 +190,47 @@ class ItemKegiatanController extends Controller
             'stgs' => $settings,
         ]);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\ItemKegiatan  $itemKegiatan
+     * @return \Illuminate\Http\Response
+     */
+    public function print(ItemKegiatan $itemKegiatan) {
+        $customcss = '';
+        // $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = [
+            'customcss' => $customcss,
+            'title' => 'Buat Program',
+            'baractive' => 'programbar',
+        ];
+        // foreach ($jmlsetting as $i => $set) {
+        //     $settings[$set->setname] = $set->value;
+        // }
+
+        // Check if the relations exist before accessing them
+        $sisa_pagu_anggaran = optional($itemKegiatan->kegiatan->program)->pagu_anggaran ?? null;
+
+        $satuans = Satuan::all();
+        $kelompoks = Kelompok::all();
+
+        // Adjust the view data accordingly
+        $pdf = FacadePdf::loadview('itemkegiatan.print', [
+            $settings['baractive'] => 'active',
+            'satuans' => $satuans,
+            'kelompoks' => $kelompoks,
+            'program' => optional($itemKegiatan->kegiatan)->program,
+            'renstra' => optional($itemKegiatan->kegiatan->program)->renstra,
+            'kegiatan' => $itemKegiatan->kegiatan,
+            'item_kegiatan' => $itemKegiatan,
+            'sisa_pagu_anggaran' => $sisa_pagu_anggaran,
+            'stgs' => $settings
+        ])->setOptions(['defaultFont' => 'sans-serif']);
+
+        return $pdf->download('laporan-sub-kegiatan-pdf');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
