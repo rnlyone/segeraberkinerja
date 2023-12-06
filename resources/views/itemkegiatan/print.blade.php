@@ -170,8 +170,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <th>Rp.<span id="volume-total"></span></th>
                                                         </tr> --}}
                                                         <tr>
-                                                            <th colspan="6">Sisa Pagu Anggaran Kegiatan</th>
-                                                            <th>Rp.<span id="sisa-pagu">{{number_format(($item_kegiatan->pagu_indikatif - $item_kegiatan->pagu_anggaran),0,',','.')}}</span></th>
+                                                            <th colspan="6">Persentase terhadap Pagu Anggaran</th>
+                                                            <th>Rp.<span id="sisa-pagu">{{$item_kegiatan->pagu_anggaran / $item_kegiatan->pagu_indikatif * 100}}%</span></th>
                                                         </tr>
                                                     </tfoot>
                                                 </table>
