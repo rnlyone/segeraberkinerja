@@ -228,7 +228,7 @@ class ItemKegiatanController extends Controller
             'stgs' => $settings
         ])->setOptions(['defaultFont' => 'sans-serif']);
 
-        return $pdf->download('laporan-sub-kegiatan-pdf');
+        return $pdf->download('laporan-'.$itemKegiatan->nama_sub.'.pdf');
     }
 
 
