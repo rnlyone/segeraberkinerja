@@ -9,6 +9,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RenstraController;
 use App\Http\Controllers\SatuanController;
 use App\Http\Controllers\SKPDController;
+use App\Http\Controllers\SusunanController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,8 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::resource('kegiatan', KegiatanController::class);
     Route::resource('item_kegiatan', ItemKegiatanController::class);
     Route::resource('komponen', KomponenController::class);
-
     Route::resource('satuan', SatuanController::class);
+    Route::resource('susunan', SusunanController::class);
 
 
     Route::get('/program/{program}/show/{tahun}', [ProgramController::class, 'get_table'])->name('program.get.tahun');
@@ -55,7 +56,18 @@ Route::group(['middleware'=> ['auth']], function(){
     Route::get('/kelompok/{kelompok}/get_data', [KelompokController::class, 'get_data'])->name('kelompok.get.data');
     Route::post('/import-satuan', [SatuanController::class, 'importSatuan'])->name('import.satuan');
 
+    Route::get('/delete-satuan/{jenis_satuan}', [SatuanController::class, 'destroy'])->name('delete.satuan');
+
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
+});
+
+route::get('/video-panduan', function(){
+    return redirect()->intended('https://drive.google.com/drive/folders/1DiEORDBZAZ8TQ1msk3mZaxqPHh5kfekj?usp=sharing');
+});
+
+
+route::get('/buku-panduan', function(){
+    return redirect()->intended('https://drive.google.com/drive/folders/1fES2AbcDX9sYfmujkm-Ixq-qKIGqwJfk?usp=drive_link');
 });
 
 Route::get('/', function () {

@@ -93,20 +93,12 @@
                 },
 
                 columns : [
-                    { "data": null, "defaultContent": "", "orderable": false },
+                    {data: 'DT_RowIndex'},
                     { "data": "nama_skpd" },
                     { "data": "level_otoritas" },
                     {data: 'action'}
                 ],
-                "columnDefs" : [
-                    {
-                        "targets": 0,
-                        "data": null,
-                        "render": function (data, type, row, meta) {
-                            return meta.row + 1; // Untuk menghasilkan nomor urutan
-                        }
-                    }
-                ],
+
 
                 order: [[0, 'asc']],
                 "drawCallback" : function( settings ) {

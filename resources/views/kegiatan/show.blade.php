@@ -114,22 +114,14 @@
                 },
 
                 columns : [
-                    { "data": null, "defaultContent": "", "orderable": false },
+                    {data: 'DT_RowIndex'},
                     { "data": "kode" },
                     { "data": "nama_sub" },
                     { "data": "pagu_anggaran" },
                     { "data": "pagu_indikatif" },
                     {data: 'action'}
                 ],
-                "columnDefs" : [
-                    {
-                        "targets": 0,
-                        "data": null,
-                        "render": function (data, type, row, meta) {
-                            return meta.row + 1; // Untuk menghasilkan nomor urutan
-                        }
-                    }
-                ],
+
 
                 order: [[0, 'asc']],
                 "drawCallback" : function( settings ) {

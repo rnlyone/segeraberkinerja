@@ -43,6 +43,10 @@
                             <div class="card-header p-0">
                                 <div class="head-label"><h5 class="mt-1">Tabel Standar Satuan Harga</h5></div>
                                 <div class="dt-action-buttons text-end">
+                                    <a href="{{route('satuan.create', ['jenis_satuan' => $anujenissatuan])}}"
+                                    class="btn btn-icon btn-success" id="tombol-tambah">
+                                        <i data-feather='plus'></i>
+                                    </a>
                                     <button type="button"
                                     data-bs-toggle="modal"
                                     data-bs-target="#addsatuan"
@@ -94,7 +98,7 @@
     $(document).ready(function(){
         const table = $('#satuantable').DataTable(
             {
-                serverSide : true,
+                // serverSide : true,
                 processing : true,
                 language : {
                     processing : "<div class='spinner-border text-primary' role='status'> <span class='visually-hidden'>Loading...</span></div>"
@@ -106,7 +110,7 @@
                 },
 
                 columns : [
-                    { "data": null, "defaultContent": "", "orderable": false },
+                    {data: 'DT_RowIndex'},
                     { "data": "id_kelompok" },
                     { "data": "kode" },
                     { "data": "nama_item" },
@@ -116,15 +120,7 @@
                     { "data": "kode_rekening" },
                     {data: 'action'}
                 ],
-                "columnDefs" : [
-                    {
-                        "targets": 0,
-                        "data": null,
-                        "render": function (data, type, row, meta) {
-                            return meta.row + 1; // Untuk menghasilkan nomor urutan
-                        }
-                    }
-                ],
+
 
                 order: [[0, 'asc']],
                 "drawCallback" : function( settings ) {

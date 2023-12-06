@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('komponens', function (Blueprint $table) {
+        Schema::create('susunans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_item');
-            $table->foreign('id_item')->references('id')->on('item_kegiatans')->onDelete('cascade'); // Pastikan ada tabel 'kegiatan' dengan kolom 'id'
-            $table->unsignedBigInteger('id_satuan');
-            $table->foreign('id_satuan')->references('id')->on('satuans')->onDelete('cascade');
+            $table->foreignId('id_asb')->constrained('satuans')->onDelete('cascade');
+            $table->foreignId('id_satuan')->constrained('satuans')->onDelete('cascade');
             $table->float('volume');
             $table->timestamps();
         });
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('komponens');
+        Schema::dropIfExists('susunans');
     }
 };

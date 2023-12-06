@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\SatuanImport;
+use App\Models\Kelompok;
 use App\Models\Satuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -62,7 +63,7 @@ class SatuanController extends Controller
                     return '<span class="badge rounded-pill bg-warning">Belum ada Harga</span>';
                 }
             })
-            ->rawColumns(['action', 'harga'])
+            ->rawColumns(['action', 'harga', 'id_kelompok'])
             ->addIndexColumn()
             ->make(true);
         }
@@ -98,9 +99,28 @@ class SatuanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $jenis_satuan = $request->query('jenis_satuan');
+
+        $customcss = '';
+        // $jmlsetting = Setting::where('group', 'env')->get();
+        $settings = ['customcss' => $customcss,
+                     'title' => 'Tambah Satuan',
+                     'baractive' => $jenis_satuan.'bar',
+                    ];
+                    // foreach ($jmlsetting as $i => $set) {
+                    //     $settings[$set->setname] = $set->value;
+                    //  }
+
+        $kelompoks = Kelompok::all();
+
+        return view('ssh.add', [
+            $settings['baractive'] => 'active',
+            'anujenissatuan' => $jenis_satuan,
+            'kelompoks' => $kelompoks,
+            'stgs' => $settings,
+        ]);
     }
 
     /**
@@ -111,7 +131,9 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        return redirect()->back()->with('success', 'Satuan Berhasil di Tambahkan.');
     }
 
     public function importSatuan(Request $request)
@@ -175,8 +197,10 @@ class SatuanController extends Controller
      * @param  \App\Models\Satuan  $satuan
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Satuan $satuan)
+    public function destroy($jenis_satuan)
     {
-        //
+        Satuan::where('jenis_satuan', $jenis_satuan)->delete();
+
+        return redirect()->route('satuan.index', ['satuan' => $jenis_satuan])->with('success', 'Semua Satuan Berhasil di Hapus');
     }
 }
