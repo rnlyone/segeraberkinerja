@@ -228,7 +228,9 @@ class ItemKegiatanController extends Controller
             'stgs' => $settings
         ])->setOptions(['defaultFont' => 'sans-serif']);
 
-        return $pdf->download('laporan-'.$itemKegiatan->nama_sub.'.pdf');
+        $pdf->stream('laporan-'.$itemKegiatan->nama_sub.'.pdf', array("Attachment" => false));
+
+        return $pdf->stream('laporan-'.$itemKegiatan->nama_sub.'.pdf', array("Attachment" => false));
     }
 
 
