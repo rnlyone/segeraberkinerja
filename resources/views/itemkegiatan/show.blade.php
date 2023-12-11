@@ -304,7 +304,7 @@
                 satuans.forEach(function(satuan) {
                     let option = document.createElement('option');
                     option.value = satuan.id;
-                    option.text = `${satuan.nama_item} `+`(${satuan.spesifikasi})`;
+                    option.text = `${satuan.nama_item} `+`(${satuan.spesifikasi})`+` Rp.`+`${satuan.harga}`;
                     satuanSelect.appendChild(option);
                 });
             },
@@ -368,9 +368,8 @@
 
         // Fungsi untuk menghitung total dan memperbarui total setiap kali ada perubahan pada input harga atau volume
 
-        let counter = 1;
-
         $('#addRowBtn').click(function() {
+            let counter = Math.floor(Math.random() * 1000000000);
             const newRow = `<tr class="draggable-row">
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><textarea type="text" class="form-control form-control-sm" name="${counter}_sub_item_kegiatan" placeholder="Nama Sub" readonly>${komponen.kode_rekening}</textarea><input type="hidden" name="${counter}_id_item" value="${komponen.id}"></td>
                                 <td style="padding-right: 0.3rem; padding-left: 0.3rem;"><textarea type="text" class="form-control form-control-sm" name="${counter}_tipe_item_kegiatan" placeholder="Nama Tipe" readonly>${komponen.kelompok.uraian}</textarea></td>
@@ -383,7 +382,6 @@
                             </tr>`;
 
             $('#itemkegiatan tbody').append(newRow);
-            counter++;
             updateGrandTotal();
         });
 

@@ -285,6 +285,8 @@ class ItemKegiatanController extends Controller
             }
         }
 
+        // dd($numericAttributes);
+
         foreach ($numericAttributes as $key => $value) {
             $index = strtok($key, '_'); // Mengambil bagian index dari kunci
             $property = substr($key, strpos($key, '_') + 1); // Mengambil sisa kunci setelah index
