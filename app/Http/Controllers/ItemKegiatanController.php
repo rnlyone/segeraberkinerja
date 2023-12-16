@@ -226,9 +226,7 @@ class ItemKegiatanController extends Controller
             'item_kegiatan' => $itemKegiatan,
             'sisa_pagu_anggaran' => $sisa_pagu_anggaran,
             'stgs' => $settings
-        ])->setOptions(['defaultFont' => 'sans-serif']);
-
-        $pdf->stream('laporan-'.$itemKegiatan->nama_sub.'.pdf', array("Attachment" => false));
+        ])->setOptions(['defaultFont' => 'sans-serif'])->setPaper('a4', 'landscape');
 
         return $pdf->stream('laporan-'.$itemKegiatan->nama_sub.'.pdf', array("Attachment" => false));
     }

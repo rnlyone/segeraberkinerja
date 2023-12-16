@@ -46,6 +46,16 @@ License: You must have a valid license purchased only from themeforest(the above
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <!-- END: Custom CSS-->
 
+    <style>
+        @media print {
+            table {
+                    width: 100%;
+                    page-break-after: auto;
+                    page-break-inside: avoid;
+                }
+        }
+    </style>
+
   </head>
   <!-- END: Head-->
 
@@ -77,19 +87,16 @@ License: You must have a valid license purchased only from themeforest(the above
                             <div class="row">
                                 <table class="table">
                                     <tbody>
-                                        <tr style="padding: 10px 0">
-                                            <td style="padding: 10px 0"><strong>Pada Program</strong></td>
-                                            <td style="padding: 10px 0">:</td>
-                                            <td>&nbsp;</td>
-                                            <td style="padding: 10px 0">{{$kegiatan->program->nama_program}}</td>
+                                        <tr style="padding: 2px 0">
+                                            <td style="padding: 2px 0"><strong>Pada Program</strong></td>
+                                            <td style="padding: 2px 0">:</td>
+                                            <td style="padding: 2px 0">{{$kegiatan->program->nama_program}}</td>
+                                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                            <td style="padding: 2px 0"><strong>Pada Kegiatan</strong></td>
+                                            <td style="padding: 2px 0">:</td>
+                                            <td style="padding: 2px 0">{{$kegiatan->nama_kegiatan}}</td>
                                         </tr>
-                                        <tr style="padding: 10px 0">
-                                            <td style="padding: 10px 0"><strong>Pada Kegiatan</strong></td>
-                                            <td style="padding: 10px 0">:</td>
-                                            <td>&nbsp;</td>
-                                            <td style="padding: 10px 0">{{$kegiatan->nama_kegiatan}}</td>
-                                        </tr>
-                                        <tr style="padding: 10px 0">
+                                        <tr style="padding: 2px 0">
                                             @php
                                             $kode = auth()->user()->skpd->kode;
                                             $kode_parts = explode('.', $kode);
@@ -97,22 +104,19 @@ License: You must have a valid license purchased only from themeforest(the above
                                             // Ambil dua elemen pertama setelah pemecahan string berdasarkan titik
                                             $kode_spkd = implode('.', array_slice($kode_parts, 0, 2));
                                             @endphp
-                                            <td style="padding: 10px 0"><strong>Kode Sub Kegiatan</strong></td>
-                                            <td style="padding: 10px 0">:</td>
+                                            <td style="padding: 2px 0"><strong>Kode Sub Kegiatan</strong></td>
+                                            <td style="padding: 2px 0">:</td>
+                                            <td style="padding: 2px 0">{{$kode_spkd}}.{{$program->kode}}.{{$kegiatan->kode}}</td>
                                             <td>&nbsp;</td>
-                                            <td style="padding: 10px 0">{{$kode_spkd}}.{{$program->kode}}.{{$kegiatan->kode}}</td>
+                                            <td style="padding: 2px 0"><strong>Nama Sub Kegiatan</strong></td>
+                                            <td style="padding: 2px 0">:</td>
+                                            <td style="padding: 2px 0">{{$item_kegiatan->nama_sub}}</td>
                                         </tr>
-                                        <tr style="padding: 10px 0">
-                                            <td style="padding: 10px 0"><strong>Nama Sub Kegiatan</strong></td>
-                                            <td style="padding: 10px 0">:</td>
+                                        <tr style="padding: 2px 0">
+                                            <td style="padding: 2px 0"><strong>Satuan</strong></td>
+                                            <td style="padding: 2px 0">:</td>
+                                            <td style="padding: 2px 0">{{$item_kegiatan->satuan}}</td>
                                             <td>&nbsp;</td>
-                                            <td style="padding: 10px 0">{{$item_kegiatan->nama_sub}}</td>
-                                        </tr>
-                                        <tr style="padding: 10px 0">
-                                            <td style="padding: 10px 0"><strong>Satuan</strong></td>
-                                            <td style="padding: 10px 0">:</td>
-                                            <td>&nbsp;</td>
-                                            <td style="padding: 10px 0">{{$item_kegiatan->satuan}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -128,24 +132,20 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </div> --}}
                                 <div class="col-12">
                                     <div class="mb-1 row">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label" for="program-id">Komponen Penyusun</label>
-                                        </div>
                                         <div class="col-sm-12">
                                             <div id="itemkegiatan" class="table-responsive">
-                                                <table id="itemkeg" class="table table-bordered" border="1">
+                                                <table id="itemkeg" class="table table-bordered" border="1" style="width: 100%">
                                                     <thead>
                                                         <tr>
-                                                            <th>No. Rek.</th>
-                                                            <th>Tipe Komponen</th>
+                                                            <th>Nomor Rekening</th>
                                                             <th>Nama Komponen</th>
                                                             <th>Satuan</th>
                                                             <th>Harga</th>
-                                                            <th>Vol.</th>
+                                                            <th>Volume</th>
                                                             <th>Total</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    {{-- <tbody>
                                                         @isset($item_kegiatan->komponens)
                                                             @foreach ($item_kegiatan->komponens as $i => $komponen)
                                                                 <tr class="draggable-row">
@@ -159,10 +159,35 @@ License: You must have a valid license purchased only from themeforest(the above
                                                                 </tr>
                                                             @endforeach
                                                         @endisset
+                                                    </tbody> --}}
+                                                    <tbody>
+                                                        @isset($item_kegiatan->komponens)
+                                                            @php
+                                                                $prevTipe = '';
+                                                            @endphp
+                                                            @foreach ($item_kegiatan->komponens as $i => $komponen)
+                                                                @if ($komponen->satuan->kelompok->uraian !== $prevTipe)
+                                                                    <tr class="draggable-row" colspan="6">
+                                                                        <td colspan="6"><strong>{{$komponen->satuan->kelompok->uraian}}</strong></td>
+                                                                    </tr>
+                                                                    @php
+                                                                        $prevTipe = $komponen->satuan->kelompok->uraian;
+                                                                    @endphp
+                                                                @endif
+                                                                <tr>
+                                                                    <td style="padding-top: 0; padding-bottom: 0;"><p type="text" style="margin: 0" name="{{$i}}_sub_item_kegiatan" placeholder="Nama Sub" readonly>{{$komponen->satuan->kode_rekening}}</p><input type="hidden" name="{{$i}}_id_item" value="{{$komponen->id_satuan}}"></td>
+                                                                    <td style="padding-top: 0; padding-bottom: 0;"><p type="text" style="margin: 0" name="{{$i}}_nama_item_kegiatan" placeholder="Nama Item" readonly>{{$komponen->satuan->nama_item}}</p></td>
+                                                                    <td style="padding-top: 0; padding-bottom: 0;"><p type="text" style="margin: 0" name="{{$i}}_satuan_item_kegiatan" placeholder="Ex. Kg/Lbr" readonly value="">{{$komponen->satuan->satuan}}</p></td>
+                                                                    <td style="padding-top: 0; padding-bottom: 0;"><p type="number" id="harga-input-{{$i}}" style="margin: 0" readonly>{{number_format(($komponen->satuan->harga),0,',','.')}}</p></td>
+                                                                    <td style="padding-top: 0; padding-bottom: 0;"><p type="number" id="volume-input-{{$i}}" style="margin: 0">{{$komponen->volume}}</p></td>
+                                                                    <td style="padding-top: 0; padding-bottom: 0;">Rp.<span id="total-row-{{$i}}" style="margin: 0">{{number_format(($komponen->satuan->harga * $komponen->volume),0,',','.')}}</span></td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endisset
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
-                                                            <th colspan="6">Total Per Sub Kegiatan</th>
+                                                            <th colspan="5">Total Per Sub Kegiatan</th>
                                                             <th>Rp.<span id="grand-total">{{number_format($item_kegiatan->pagu_anggaran,0,',','.')}}</span></th>
                                                         </tr>
                                                         {{-- <tr>
@@ -170,7 +195,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                                             <th>Rp.<span id="volume-total"></span></th>
                                                         </tr> --}}
                                                         <tr>
-                                                            <th colspan="6">Persentase terhadap Pagu Anggaran</th>
+                                                            <th colspan="5">Persentase terhadap Pagu Indikatif</th>
                                                             <th>Rp.<span id="sisa-pagu">{{$item_kegiatan->pagu_anggaran / $item_kegiatan->pagu_indikatif * 100}}%</span></th>
                                                         </tr>
                                                     </tfoot>
@@ -196,10 +221,8 @@ License: You must have a valid license purchased only from themeforest(the above
 <footer class="footer footer-static footer-light">
 <p class="clearfix mb-0"><span class="float-md-start d-block d-md-inline-block mt-25">COPYRIGHT &copy; 2023<a
             class="ms-25" href="https://segeraberkinerja.com" target="_blank">Pemerintah Kabupaten Kolaka Utara</a><span
-            class="d-none d-sm-inline-block">, All rights Reserved.</span></span></p>
+            class="d-none d-sm-inline-block">, Dokumen SEGERABERKINERJA.</span></span></p>
 </footer>
-<button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
-<!-- END: Footer-->
 </body>
 <!-- END: Body-->
 
