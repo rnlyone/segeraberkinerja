@@ -111,7 +111,7 @@
                 <a class="nav-link" href="{{route('logout')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Logout"><i class="ficon" data-feather="log-out"></i>
             </a></li>
             <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">{{auth()->user()->name}}</span><span class="user-status">{{auth()->user()->skpd->nama_skpd}}</span></div><span class="avatar"><img class="round" src="/{{auth()->user()->username}}.png" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span></a>
+                <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">{{auth()->user()->name}}</span><span class="user-status">{{auth()->user()->skpd->nama_skpd}}</span></div><span class="avatar"><img class="round" src="/admin.bkad.png" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span></a>
             </li>
           </ul>
         </div>
